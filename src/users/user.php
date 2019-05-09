@@ -33,6 +33,13 @@ class UsersApiResourceUser extends ApiResource
 		$formData       = $app->input->getArray();
 		$userIdentifier = $app->input->get('id', 0, 'string');
 
+		// If fields are set, pass it to com_fields
+		if (isset($formData['fields']))
+		{
+			$formData['com_fields'] = $formData['fields'];
+			unset($formData['fields']);
+		}
+
 		// Get current logged in user.
 		$me = $this->plugin->get('user');
 
